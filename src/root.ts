@@ -19,7 +19,7 @@ import { iExecController } from "./controllers/iExecController.ts";
 
 dotenv.config();
 
-DatabaseController.getInstance();
+// DatabaseController.getInstance();
 iExecController.getInstance();
 
 const app = express();
