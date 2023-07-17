@@ -12,7 +12,8 @@ export type Passenger = {
   birthdate: string;
 };
 
-export type TaskStatus = {
+export type DealProgress = {
+  dealId: string;
   tasksCount: number;
   tasksDone: number;
 };
