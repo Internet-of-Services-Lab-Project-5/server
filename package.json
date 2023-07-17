@@ -4,8 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "ts-node --esm ./src/root.ts",
-    "dev": "nodemon --exec ts-node ./src/root.ts"
+    "start": "ts-node --esm ./src/root.ts"
   },
   "dependencies": {
     "@json2csv/plainjs": "^7.0.1",
@@ -26,8 +25,8 @@
     "json2csv": "^6.0.0-alpha.2",
     "morgan": "^1.10.0",
     "pg": "^8.11.0",
-    "web3.storage": "^4.5.4",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "web3.storage": "^4.5.4"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.5.0",

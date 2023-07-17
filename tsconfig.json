@@ -110,7 +110,7 @@
   },
   "include": [
     "./src/**/*.ts", // Include all TypeScript files inside the 'src' directory and its subdirectories
-    "./src/controllers/iExecController.ts"
+    "src/clients/IExecClient.ts"
   ],
   "exclude": [
     "./node_modules" // Exclude the 'node_modules' directory

@@ -5,18 +5,18 @@ const TABLE = "mytable" as const;
 const COLS = ["first_name", "last_name", "birthdate", "incident", "incident_date"] as const;
 const FILENAME = "../dataset.csv";
 
-export class DatabaseController {
+export class DatabaseClient {
   private client?: pg.Client;
-  private static instance: DatabaseController;
+  private static instance: DatabaseClient;
 
   constructor() {}
 
-  static async getInstance(): Promise<DatabaseController> {
-    if (!DatabaseController.instance) {
-      DatabaseController.instance = new DatabaseController();
-      await DatabaseController.instance.init();
+  static async getInstance(): Promise<DatabaseClient> {
+    if (!DatabaseClient.instance) {
+      DatabaseClient.instance = new DatabaseClient();
+      await DatabaseClient.instance.init();
     }
-    return DatabaseController.instance;
+    return DatabaseClient.instance;
   }
 
   private async init() {

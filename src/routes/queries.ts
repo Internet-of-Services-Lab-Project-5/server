@@ -1,11 +1,11 @@
 import express, { Request, Response, NextFunction } from "express";
-import { DatabaseController } from "../controllers/DatabaseController.ts";
+import { DatabaseClient } from "../clients/DatabaseClient.ts";
 
 const router = express.Router();
 
 router.get("/", async (_: Request, res: Response) => {
   try {
-    const dbClient = await DatabaseController.getInstance();
+    const dbClient = await DatabaseClient.getInstance();
     const rows = await dbClient.getRows();
     res.status(200).json(rows);
   } catch (e) {
@@ -16,7 +16,7 @@ router.get("/", async (_: Request, res: Response) => {
 
 router.post("/", async (req: Request, res: Response) => {
   try {
-    const dbClient = await DatabaseController.getInstance();
+    const dbClient = await DatabaseClient.getInstance();
     const { firstname, lastname, birthdate, incident, incidentDate } = req.body;
     const row = { firstname, lastname, birthdate, incident, incidentDate };
     const value = await dbClient.addRow(row);
