@@ -214,12 +214,11 @@ export class SconeClient {
             console.log("deployed dataset at", address);
 
             await this.iexec.dataset.pushDatasetSecret(address, encryptionKey, sconeSceretOptions);
-            const appWallet = process.env.IEXEC_APP_WALLET!; //TODO: update in .env
+            const appWallet = process.env.IEXEC_APP_WALLET!;
             const datasetOrderToSign = await this.iexec.order.createDatasetorder({
                 dataset: address,
                 volume: 1000,
                 tag: sconeTag,
-                requesterrestrict: appWallet,
             });
             const datasetOrder = await this.iexec.order.signDatasetorder(datasetOrderToSign, orderOptions);
             const orderHash = await this.iexec.order.publishDatasetorder(datasetOrder);
