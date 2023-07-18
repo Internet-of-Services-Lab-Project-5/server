@@ -64,6 +64,12 @@ export class DatabaseClient {
         return result;
     }
 
+    async dropTable(table?: string) {
+        if (!this.client) throw new Error("Client not connected.");
+        const result = await this.client.query(`DROP TABLE IF EXISTS ${table || process.env.DB_TABLE}`);
+        return result;
+    }
+
     async deleteRow(firstname: string, lastname: string, birthdate: string) {
         if (!this.client) throw new Error("Client not connected.");
         const result = await this.client.query(`DELETE FROM ${process.env.DB_TABLE} WHERE first_name = $1 AND last_name = $2 AND birthdate = $3`, [

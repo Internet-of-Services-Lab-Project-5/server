@@ -20,7 +20,7 @@ const requestParams = {
     iexec_result_storage_provider: "ipfs",
     iexec_result_storage_proxy: "https://result.v8-bellecour.iex.ec",
 };
-const sconeTag = ["tag", "scone"];
+const sconeTag = ["tee", "scone"];
 const sconeSMS = { smsURL: "https://sms.scone-debug.v8-bellecour.iex.ec" };
 const sconeSceretOptions = { teeFramework: "scone" } as const;
 const datasetFilename = "./data/deployedDataset.csv";
