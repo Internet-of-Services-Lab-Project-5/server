@@ -41,8 +41,9 @@ router.post("/many", async (req: Request, res: Response) => {
 
 router.post("/create", async (req: Request, res: Response) => {
     try {
+        const { table } = req.body;
         const dbClient = await DatabaseClient.getInstance();
-        const value = await dbClient.createTable();
+        const value = await dbClient.createTable(table);
         res.status(200).json(value);
     } catch (e) {
         console.log(e);

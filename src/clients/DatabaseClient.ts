@@ -38,7 +38,7 @@ export class DatabaseClient {
     async addRow(value: DBEntry) {
         if (!this.client) throw new Error("Client not connected.");
         const result = await this.client.query(
-            `INSERT INTO ${process.env.DB_TABLE} (id, ${COLS.join(", ")}) VALUES ((SELECT MAX(id)+1 FROM ${
+            `INSERT INTO ${process.env.DB_TABLE} (id, ${COLS.join(", ")}) VALUES ((SELECT COALESCE(MAX(id), 0) + 1 FROM ${
                 process.env.DB_TABLE
             }), $1, $2, $3, $4, $5) RETURNING *`,
             [value.firstname, value.lastname, value.birthdate, value.incident, value.incidentDate]
@@ -48,19 +48,18 @@ export class DatabaseClient {
 
     async addRows(values: DBEntry[]) {
         if (!this.client) throw new Error("Client not connected.");
-        const result = await this.client.query(
-            `INSERT INTO ${process.env.DB_TABLE} (id, ${COLS.join(", ")}) VALUES ${values
-                .map((value) => `((SELECT MAX(id)+1 FROM ${process.env.DB_TABLE}), $1, $2, $3, $4, $5)`)
-                .join(", ")}`,
-            values.map((value) => [value.firstname, value.lastname, value.birthdate, value.incident, value.incidentDate])
-        );
-        return result;
+        values.forEach((value) => {
+            this.addRow(value);
+        });
+        return true;
     }
 
-    async createTable() {
+    async createTable(table?: string) {
         if (!this.client) throw new Error("Client not connected.");
         const result = await this.client.query(
-            `CREATE TABLE IF NOT EXISTS ${process.env.DB_TABLE} (id SERIAL PRIMARY KEY, ${COLS.join(" VARCHAR(255), ")} VARCHAR(255))`
+            `CREATE TABLE IF NOT EXISTS ${table || process.env.DB_TABLE} (id INTEGER NOT NULL PRIMARY KEY, ${COLS.join(
+                " VARCHAR(255) NOT NULL, "
+            )} VARCHAR(255) NOT NULL)`
         );
         return result;
     }
