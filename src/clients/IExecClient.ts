@@ -50,7 +50,7 @@ export class GramineClient {
             if (!this.iexec) throw Error("iexec not initiated yet");
             const apporder = await this.getAppOrder();
             const workerpoolorder = await this.getWorkerpoolOrder();
-            await this.initStorage();
+            // await this.initStorage();
             const argKey = await this.pushSecret(passengers);
             const statusKey = generateKey(10);
             const reportAddress = process.env.STAGING_URL ? `${process.env.STAGING_URL}/saveStatus` : "";
