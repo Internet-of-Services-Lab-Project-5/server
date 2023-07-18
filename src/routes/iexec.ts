@@ -33,6 +33,40 @@ router.post("/checkStatus", async (req: Request, res: Response) => {
     }
 });
 
+router.get("/observe", async (req: Request, res: Response) => {
+    const statusKey = req.query.statusKey;
+    if (!statusKey || typeof statusKey !== "string") {
+        res.status(400).json({ error: "Missing parameters" });
+        return;
+    }
+    const status = DealStatus.getInstance();
+    if (!statusKey || !status.status[statusKey] || !status.status[statusKey].dealId) {
+        res.status(400).json({ error: "No status found" });
+        return;
+    }
+    res.setHeader("Content-Type", "text/event-stream");
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Connection", "keep-alive");
+    res.setHeader("Transfer-Encoding", "chunked");
+    const iexec = await GramineClient.getInstance();
+    try {
+        const obs = await iexec.getDealObservable(status.status[statusKey].dealId);
+        if (!obs) {
+            res.status(500).json({ error: "No deal observable" });
+            return;
+        }
+        const unsubscribe = obs.subscribe({
+            next: console.log,
+            complete: () => res.write(`data: ${JSON.stringify({ isCompleted: true })}\n\n`),
+            error: console.warn,
+        });
+        req.on("close", unsubscribe);
+    } catch (e: any) {
+        console.warn("CAUGHT ERROR:", e);
+        res.status(500).json({ error: e.message });
+    }
+});
+
 router.post("/saveStatus", async (req: Request, res: Response) => {
     const { statusKey, tasksCount, tasksDone, apiKey } = req.body;
     if (apiKey !== process.env.STATUS_API_KEY) {

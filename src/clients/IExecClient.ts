@@ -147,34 +147,16 @@ export class GramineClient {
         return key;
     }
 
-    //Clean up
     async getDealObservable(dealId: string) {
         if (!this.iexec) throw Error("iexec not initiated yet");
-
         const dealObservable = await this.iexec.deal.obsDeal(dealId);
         return dealObservable;
     }
 
-    async showDeal(dealId: string) {
-        if (!this.iexec) throw Error("iexec not initiated yet");
-
-        const data = await this.iexec?.deal.show(dealId);
-        console.log(data);
-    }
-
     async getTaskIdFromDeal(dealId: string) {
         if (!this.iexec) throw Error("iexec not initiated yet");
-
         const taskId = await this.iexec?.deal.computeTaskId(dealId, 0);
         return taskId;
-    }
-
-    async checkTask(taskId: string) {
-        if (!this.iexec) throw Error("iexec not initiated yet");
-
-        await this.iexec?.deal.show("");
-        const task = await this.iexec?.task.show(taskId);
-        return task;
     }
 
     async getResult(dealId: string) {
