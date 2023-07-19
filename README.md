@@ -50,3 +50,7 @@ To insert a different iExec wallet you need to replace the content of `src/walle
 ### Templates
 
 We have provided some templates in the [templates](https://github.com/Internet-of-Services-Lab-Project-5/templates "templates") repository.
+
+### Local database
+
+We have also included a script to run a local PostgreSQL database with docker. The script path: `data/dbInit/init_postgress.sh`.
