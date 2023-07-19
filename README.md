@@ -14,6 +14,8 @@ Run `npm start` to start the server. The server will run on port `3000`.
 
 ## Environment
 
+### Setting the environment variables
+
 You need to insert a `.env` file in the root directory that contains the following values:
 ```
 IEXEC_WALLET_PASSWORD=      // the password to the iExec wallet of this node server
@@ -40,5 +42,11 @@ DB_USER=                    // name of the database user
 DB_PASSWORD=                // password of the db
 DB_TABLE=                   // name of the table with unruly passengers
 ```
+
+### Inserting the iExec wallet
+
+To insert a different iExec wallet you need to replace the content of `src/wallet.json` with the content of your wallet's JSON file.
+
+### Templates
 
 We have provided some templates in the [templates](https://github.com/Internet-of-Services-Lab-Project-5/templates "templates") repository.
