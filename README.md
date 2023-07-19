@@ -41,11 +41,4 @@ DB_PASSWORD=                // password of the db
 DB_TABLE=                   // name of the table with unruly passengers
 ```
 
-We have provided some templates in the template repository.
-
-### contracts
-
--   `0x295a188f1Ecf136F32a50BA5E9F640201FD94553`: Airline1 - Airline3
--   `0xC7FB1d6476d9156a350bb47D7e4D34E20033546D`: Airline1 - Airline4
--   `0xf26c24D22b091D0907cED597c3177E584759d0Fa`: Airline1 - Airline5
--   `0x56858D9aa2d84715BB885CBC44cfEf8f742555E7`: Playground
+We have provided some templates in the [templates](https://github.com/Internet-of-Services-Lab-Project-5/templates "templates") repository.
