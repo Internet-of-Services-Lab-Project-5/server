@@ -1,20 +1,47 @@
-### Node Express template project
+# Server
 
-This project is based on a GitLab [Project Template](https://docs.gitlab.com/ee/gitlab-basics/create-project.html).
+## About this repository
 
-Improvements can be proposed in the [original project](https://gitlab.com/gitlab-org/project-templates/express).
+This repository contains the code to run the node server of the unruly passenger web app. This server takes in requests from the client and interacts with a PostgreSQL database, iExec, and a smart contract.
 
-### CI/CD with Auto DevOps
+## Install
 
-This template is compatible with [Auto DevOps](https://docs.gitlab.com/ee/topics/autodevops/).
+Run `npm i` in the root directory to install the dependencies.
 
-If Auto DevOps is not already enabled for this project, you can [turn it on](https://docs.gitlab.com/ee/topics/autodevops/#enabling-auto-devops) in the project settings.
+## Start the server
 
-### Developing with Gitpod
+Run `npm start` to start the server. The server will run on port `3000`.
 
-This template has a fully-automated dev setup for [Gitpod](https://docs.gitlab.com/ee/integration/gitpod.html).
+## Environment
 
-If you open this project in Gitpod, you'll get all Node dependencies pre-installed and Express will open a web preview.
+You need to insert a `.env` file in the root directory that contains the following values:
+```
+IEXEC_WALLET_PASSWORD=      // the password to the iExec wallet of this node server
+IEXEC_APP=                  // the address of the deployed gramine app (starts with 0x).
+IEXEC_APP_WALLET=           // the address of the wallet used by the gramine app (last stand: 0x8790ed88752255da1a08142d5ba31f0fc0b97fd4)
+WEB3STORAGE_TOKEN=          // an IPFS storage token
+
+ETH_ADDRESS=                // the address of the ethereum wallet (starts with 0x)
+ETH_PRIVATE_KEY=            // the ethereum private key of the wallet
+ALCHEMY_KEY=                // the api key from you alchemy account (We use Alchemy as a provider).
+
+SMART_CONTRACT_ADDRESS=     // the address of the smart contract to interact with
+
+USERNAME=                   // pseudo username for the client
+PASSWORD=                   // pseudo password for the client
+
+STATUS_API_KEY=             // api key that the gramine app uses to report the status to the server
+STAGING_URL=                // url of this server (remove if you run it on localhost)
+
+DB_HOST=                    // host of postgres db
+DB_PORT=                    // port of postgres db 
+DB_NAME=                    // name of the database
+DB_USER=                    // name of the database user
+DB_PASSWORD=                // password of the db
+DB_TABLE=                   // name of the table with unruly passengers
+```
+
+We have provided some templates in the template repository.
 
 ### contracts
 
